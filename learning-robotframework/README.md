@@ -1,6 +1,6 @@
-#Setup
+# Setup
 
-##Install Robot Framework libraries
+## Install Robot Framework libraries
 
 ```
 pip install robotframework
@@ -8,25 +8,25 @@ pip install --upgrade robotframework-selenium
 pip install --upgrade robotframework-requests
 pip install --upgrade robotframework-jsonlibrary
 ```
-##Browser drivers
+## Browser drivers
 
 Download the relevant browser drivers from SeleniumHQ and extract these to your path
 
-##Add plugins to PyCharm
+## Add plugins to PyCharm
 
 RobotFramework Support
 IntelliBot
 
-##Configure external tools
+## Configure external tools
 
 I followed the steps listed on https://softwaretester.info/pycharm-and-robot-framework/
 `Note:  it's now robot, not pybot`
 
 Alternatively, run it on the command line using `robot path/to/test/file.robot`
 
-#Test Suite specifics
+# Test Suite specifics
 
-##Google authentication test
+## Google authentication test
 
 Add the following ENV VARS with values representing your `client_id` and `client_secret`:
 ```bash

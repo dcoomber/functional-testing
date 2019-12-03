@@ -1,34 +1,22 @@
 *** Settings ***
-Documentation   My First Robotframework Test
-Library         SeleniumLibrary
+Documentation   Rest API test using Robot Framework
 Library         RequestsLibrary
+Library         JSONLibrary
 Library         Collections
 
 *** Variables ***
-${Selenium_URL}     http://www.google.co.za
-${Rest_URL}         https://automationintesting.online
+${base_url}         https://automationintesting.online
 
 *** Test Cases ***
-My First Test
-    Log         Hello World...
-
-First Selenium Test
-#    Open Browser                ${Selenium_URL}     googlechrome
-#    Set Browser Implicit Wait   5
-#    Input Text                  name=q              RobotFramework for dummies
-#    Press Keys                  name=q              ENTER
-#    Sleep                       2
-#    Close Browser
-#    Log                         Test complete
-
-First REST Test - Get
-    create session                          ListBookings         ${Rest_URL}
+Get (REST API)
+    create session                          ListBookings         ${base_url}
     ${response}=                            get request          ListBookings         /room
-    dictionary should not contain value     ${response.json()}   101
     Log                                     ${response.json()}
+    dictionary should not contain value     ${response.json()}   101
 
-REST Test - Post
-    #create session                  AddData             ${Rest_URL}
-    #&{body}=        create dictionary   first_name=Testing  middle_name=A   last_name=World     date_of_birth=12/12/1990
-    #${response}=    post request     AddData         Api/studentDetails     data=&{body}
-    #log to console      ${response}
+Post (REST API)
+    &{booking_dates}=               create dictionary         checkin=2019-12-19    checkout=2019-12-21
+    create session                  CreateBooking             ${base_url}
+    &{body}=                        create dictionary         bookingdates=&{booking_dates}     depositpaid=false       email=some@one.com      firstname=David     lastname=Coomber    phone=+12345678901  roomid=1
+    ${response}=    post request    CreateBooking         /booking     data=${body}
+    Log                             ${response.json()}

@@ -23,6 +23,6 @@ Google Authentication
     ${response}=        post request            Authenticate        ${auth_endpoint}     data=${body}
     ${access_token}=    get from dictionary     ${response.json()}  access_token
 
-
+    should be equal as strings  ${response.status_code}     200
     
     
