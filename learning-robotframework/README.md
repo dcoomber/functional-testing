@@ -28,7 +28,7 @@ Alternatively, run it on the command line using `robot path/to/test/file.robot`
 
 ## Google authentication test
 
-Add the following ENV VARS with values representing your `client_id` and `client_secret`:
+Add the following ENV VARS with values representing your `client_id`, `client_secret` and `refresh_token`:
 ```bash
 # Robot Framework
 export GOOGLE_AUTH_CLIENT_ID=<<YOUR ID HERE>>
