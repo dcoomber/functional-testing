@@ -33,5 +33,5 @@ Add the following ENV VARS with values representing your `client_id` and `client
 # Robot Framework
 export GOOGLE_AUTH_CLIENT_ID=<<YOUR ID HERE>>
 export GOOGLE_AUTH_CLIENT_SECRET=<<YOUR SECRET HERE>>
-export GOOGLE_AUTH_REFRESH_TOKEN=1/DtpQ4jdkL5M31jOK1hZ5p8azfR1oxxLiRlhSKpcBqko
+export GOOGLE_AUTH_REFRESH_TOKEN=<<YOUR TOKEN HERE>>
 ```
