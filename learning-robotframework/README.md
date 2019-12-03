@@ -14,8 +14,8 @@ Download the relevant browser drivers from SeleniumHQ and extract these to your 
 
 ## Add plugins to PyCharm
 
-RobotFramework Support
-IntelliBot
+- RobotFramework Support
+- IntelliBot
 
 ## Configure external tools
 
