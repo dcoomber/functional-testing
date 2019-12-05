@@ -1,6 +1,11 @@
 *** Settings ***
 Library         SeleniumLibrary
 
+Suite Setup      Log     Test suite setup
+Suite Teardown   Log     Test suite teardown
+Test Setup       Log     Test setup
+Test Teardown    Log     Test teardown
+
 *** Variables ***
 ${URL}          https://opensource-demo.orangehrmlive.com
 @{CREDENTIALS}  Admin   admin123
@@ -15,9 +20,7 @@ LoginTest
     Open Browser      ${URL}            chrome
     Set Browser Implicit Wait   5
     Login
-#    Click Element     id=welcome
-#    Click Element     name=Logout
-    Go To             ${URL}/index.php/auth/logout
+    Logout
     Close Browser
     Log               Test complete
     Log               This test was executed by %{LOGNAME}
@@ -27,3 +30,8 @@ Login
     Input Text        id=txtUsername    @{CREDENTIALS}[0]
     Input Password    id=txtPassword    &{LOGINDATA}[password]
     Click Button      id=btnLogin
+
+Logout
+#    Click Element     id=welcome
+#    Click Element     name=Logout
+    Go To             ${URL}/index.php/auth/logout
