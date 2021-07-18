@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "2a708cd3-e458-480a-bc06-af3225965353",
+		"name": "Bookings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve list of bookings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Response code",
+							"pm.test(\"Test returned 200 code\", function() {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"// Check the response object",
+							"pm.test(\"Test that response is an array\", () => {",
+							"  pm.expect(pm.response.json()).to.be.an(\"array\");",
+							"});",
+							"",
+							"// If there is data, confirm the data type",
+							"if ( pm.response.json().length > 0 ) {",
+							"    pm.test(\"Test data types of the response array\", () => {",
+							"        pm.expect(pm.response.json()[0].bookingid).to.be.a(\"number\");",
+							"    })",
+							"",
+							"    pm.collectionVariables.set(\"bookingId\", pm.response.json()[0].bookingid);",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://hotel-test.equalexperts.io/booking",
+					"protocol": "http",
+					"host": [
+						"hotel-test",
+						"equalexperts",
+						"io"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve a booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Response code",
+							"pm.test(\"Test returned 200 code\", function() {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"// Validate the response data for successful responses",
+							"if ( pm.response.code === 200 ) {",
+							"    const jsonData = pm.response.json();",
+							"",
+							"    pm.test(\"Test data type of a 200 response\", () => {",
+							"        pm.expect(jsonData).to.be.an(\"object\");",
+							"        pm.expect(jsonData.firstname).to.be.a(\"string\");",
+							"        pm.expect(jsonData.lastname).to.be.a(\"string\");",
+							"        pm.expect(jsonData.totalprice).to.be.a(\"number\");",
+							"        pm.expect(jsonData.depositpaid).to.be.a(\"boolean\");",
+							"        pm.expect(jsonData.bookingdates.checkin).to.be.a(\"string\");",
+							"        pm.expect(jsonData.bookingdates.checkout).to.be.a(\"string\");",
+							"    })",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://hotel-test.equalexperts.io/booking/:bookingId",
+					"protocol": "http",
+					"host": [
+						"hotel-test",
+						"equalexperts",
+						"io"
+					],
+					"path": [
+						"booking",
+						":bookingId"
+					],
+					"variable": [
+						{
+							"key": "bookingId",
+							"value": "{{bookingId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Retrieve collection variables for data-driven tests",
+							"const httpResponse = parseInt(pm.collectionVariables.get(\"httpResponse\"));",
+							"const description = pm.collectionVariables.get(\"description\");",
+							"const fullName = pm.collectionVariables.get(\"firstName\") + ' ' + pm.collectionVariables.get(\"lastName\");;",
+							"",
+							"// Validate response code",
+							"pm.test(\"Status code is \" + httpResponse + \" for \" + description + \" ('\" + fullName + \"')\", function () {",
+							"    pm.expect(pm.response.code).to.eql(httpResponse);",
+							"});",
+							"",
+							"// Validate the response data for successful responses",
+							"if ( pm.response.code === 200 ) {",
+							"    const jsonData = pm.response.json();",
+							"",
+							"    pm.test(\"Test data type of a 200 response\", () => {",
+							"        pm.expect(jsonData).to.be.an(\"object\");",
+							"        pm.expect(jsonData.bookingid).to.be.a(\"number\");",
+							"        pm.expect(jsonData.booking.firstname).to.be.a(\"string\");",
+							"        pm.expect(jsonData.booking.lastname).to.be.a(\"string\");",
+							"        pm.expect(jsonData.booking.totalprice).to.be.a(\"number\");",
+							"        pm.expect(jsonData.booking.depositpaid).to.be.a(\"boolean\");",
+							"        pm.expect(jsonData.booking.bookingdates.checkin).to.be.a(\"string\");",
+							"        pm.expect(jsonData.booking.bookingdates.checkout).to.be.a(\"string\");",
+							"    })",
+							"",
+							"    // Persist the bookingId for later use (only delete our own test data)",
+							"    pm.collectionVariables.set(\"bookingId\", jsonData.bookingid);",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstname\": \"{{firstName}}\",\n    \"lastname\": \"{{lastName}}\",\n    \"totalprice\": {{totalPrice}},\n    \"depositpaid\": {{depositPaid}},\n    \"bookingdates\": {\n        \"checkin\": \"{{checkIn}}\",\n        \"checkout\": \"{{checkOut}}\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://hotel-test.equalexperts.io/booking/",
+					"protocol": "http",
+					"host": [
+						"hotel-test",
+						"equalexperts",
+						"io"
+					],
+					"path": [
+						"booking",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Response code",
+							"pm.test(\"Test returned 201 code\", function() {",
+							"    pm.expect(pm.response.code).to.eql(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+						"key": "authorization",
+						"value": "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://hotel-test.equalexperts.io/booking/:bookingid",
+					"protocol": "http",
+					"host": [
+						"hotel-test",
+						"equalexperts",
+						"io"
+					],
+					"path": [
+						"booking",
+						":bookingid"
+					],
+					"variable": [
+						{
+							"key": "bookingid",
+							"value": "{{bookingId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "firstName",
+			"value": "Mickey"
+		},
+		{
+			"key": "lastName",
+			"value": "Mouse"
+		},
+		{
+			"key": "totalPrice",
+			"value": "50000"
+		},
+		{
+			"key": "depositPaid",
+			"value": "true"
+		},
+		{
+			"key": "checkIn",
+			"value": "2022-05-01"
+		},
+		{
+			"key": "checkOut",
+			"value": "2022-05-31"
+		},
+		{
+			"key": "description",
+			"value": "successful request"
+		},
+		{
+			"key": "httpResponse",
+			"value": "200"
+		},
+		{
+			"key": "bookingId",
+			"value": 16678
+		}
+	]
+}

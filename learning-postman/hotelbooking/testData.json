@@ -1,0 +1,72 @@
+[
+    {
+        "firstname": "Mickey",
+        "lastname": "Mouse",
+        "totalprice": 1000,
+        "depositpaid": true,
+        "checkin": "2022-01-16",
+        "checkout": "2022-01-19",
+        "description": "valid data",
+        "httpresponse": 200
+    },
+    {
+        "firstname": 123456,
+        "lastname": "Duck",
+        "totalprice": 2000,
+        "depositpaid": false,
+        "checkin": "2022-02-16",
+        "checkout": "2022-02-29",
+        "description": "invalid firstName (numeric)",
+        "httpresponse": 400
+    },
+    {
+        "firstname": "Donald",
+        "lastname": "\"",
+        "totalprice": 3000,
+        "depositpaid": true,
+        "checkin": "2022-03-16",
+        "checkout": "2022-03-31",
+        "description": "invalid lastName (quotes)",
+        "httpresponse": 400
+    },
+    {
+        "firstname": "Darkwing",
+        "lastname": "Duck",
+        "totalprice": "abc",
+        "depositpaid": false,
+        "checkin": "2022-04-31",
+        "checkout": "2022-04-30",
+        "description": "invalid totalPrice (alpha)",
+        "httpresponse": 400
+    },
+    {
+        "firstname": "Howard",
+        "lastname": "The Duck",
+        "totalprice": 5000,
+        "depositpaid": "abcd",
+        "checkin": "2022-05-32",
+        "checkout": "2022-04-30",
+        "description": "invalid depositPaid (alpha)",
+        "httpresponse": 400
+    },
+    {
+        "firstname": "Goofy",
+        "lastname": "Goof",
+        "totalprice": 6000,
+        "depositpaid": false,
+        "checkin": "2022-06-32",
+        "checkout": "2022-06-30",
+        "description": "invalid checkIn",
+        "httpresponse": 400
+    },
+    {
+        "firstname": "Minnie",
+        "lastname": "Mouse",
+        "totalprice": 7000,
+        "depositpaid": true,
+        "checkin": "2022-07-01",
+        "checkout": "2022-07-32",
+        "description": "invalid checkOut",
+        "httpresponse": 400
+    }
+]
