@@ -4,7 +4,7 @@
 
 ```
 pip install robotframework
-pip install --upgrade robotframework-selenium
+pip install --upgrade robotframework-seleniumlibrary
 pip install --upgrade robotframework-requests
 pip install --upgrade robotframework-jsonlibrary
 ```
@@ -31,7 +31,7 @@ Alternatively, run it on the command line using `robot path/to/test/file.robot`
 Add the following ENV VARS with values representing your `client_id`, `client_secret` and `refresh_token`:
 ```bash
 # Robot Framework
-export GOOGLE_AUTH_CLIENT_ID=<<YOUR ID HERE>>
-export GOOGLE_AUTH_CLIENT_SECRET=<<YOUR SECRET HERE>>
-export GOOGLE_AUTH_REFRESH_TOKEN=<<YOUR TOKEN HERE>>
+export GOOGLE_AUTH_CLIENT_ID=<YOUR ID HERE>
+export GOOGLE_AUTH_CLIENT_SECRET=<YOUR SECRET HERE>
+export GOOGLE_AUTH_REFRESH_TOKEN=<YOUR TOKEN HERE>
 ```
