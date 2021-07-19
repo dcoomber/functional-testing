@@ -39,12 +39,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://hotel-test.equalexperts.io/booking",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/booking",
 					"host": [
-						"hotel-test",
-						"equalexperts",
-						"io"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"booking"
@@ -100,12 +97,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://hotel-test.equalexperts.io/booking/:bookingId",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/booking/:bookingId",
 					"host": [
-						"hotel-test",
-						"equalexperts",
-						"io"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"booking",
@@ -183,12 +177,9 @@
 					}
 				},
 				"url": {
-					"raw": "http://hotel-test.equalexperts.io/booking/",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/booking/",
 					"host": [
-						"hotel-test",
-						"equalexperts",
-						"io"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"booking",
@@ -235,12 +226,9 @@
 					}
 				],
 				"url": {
-					"raw": "http://hotel-test.equalexperts.io/booking/:bookingid",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/booking/:bookingid",
 					"host": [
-						"hotel-test",
-						"equalexperts",
-						"io"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"booking",
