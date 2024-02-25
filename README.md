@@ -6,10 +6,17 @@ Karate is the only open-source tool to combine API test-automation, mocks and pe
 
 Go [here](karate/README.md) for more details.
 
-## Postman
+## API
+
+### Postman
 Postman is the collaboration platform for API development. Postman simplifies each step of building an API and streamlines collaboration so you can create better APIs—faster.
 
-Go [here](postman/README.md) for more details.
+Go [here](api-postman/README.md) for more details.
+
+### Bruno
+Bruno is a Fast and Git-Friendly Opensource API client. Bruno stores your collections directly in a folder on your filesystem. We use a plain text markup language, Bru, to save information about API requests.
+
+Go [here](api-bruno/README.md) for more details.
 
 ## Robot Framework
 Robot Framework is a generic test automation framework for acceptance testing and acceptance test-driven development. It is a keyword-driven testing framework that uses tabular test data syntax.

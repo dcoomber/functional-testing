@@ -1,0 +1,45 @@
+meta {
+  name: Retrieve a booking
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/booking/{{bookingId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: */*
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:pre-request {
+  // 
+}
+
+tests {
+  // // Response code
+  // pm.test("Test returned 200 code", function() {
+  //     pm.expect(pm.response.code).to.eql(200);
+  // });
+  // 
+  // // Validate the response data for successful responses
+  // if ( pm.response.code === 200 ) {
+  //     const jsonData = pm.response.json();
+  // 
+  //     pm.test("Test data type of a 200 response", () => {
+  //         pm.expect(jsonData).to.be.an("object");
+  //         pm.expect(jsonData.firstname).to.be.a("string");
+  //         pm.expect(jsonData.lastname).to.be.a("string");
+  //         pm.expect(jsonData.totalprice).to.be.a("number");
+  //         pm.expect(jsonData.depositpaid).to.be.a("boolean");
+  //         pm.expect(jsonData.bookingdates.checkin).to.be.a("string");
+  //         pm.expect(jsonData.bookingdates.checkout).to.be.a("string");
+  //     })
+  // };
+}

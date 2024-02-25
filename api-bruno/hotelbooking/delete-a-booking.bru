@@ -1,0 +1,31 @@
+meta {
+  name: Delete a booking
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/booking/{{bookingId}}
+  body: none
+  auth: none
+}
+
+headers {
+  authorization: Basic {{authToken}}
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:pre-request {
+  // 
+}
+
+tests {
+  // // Response code
+  // pm.test("Test returned 201 code", function() {
+  //     pm.expect(pm.response.code).to.eql(201);
+  // });
+  // 
+}
