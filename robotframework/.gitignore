@@ -1,3 +1,7 @@
+# Robot framework
 log.html
 output.xml
 report.html
+
+# Mac OS
+**/.DS_Store
