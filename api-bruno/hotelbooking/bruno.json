@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Hotel Bookings",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

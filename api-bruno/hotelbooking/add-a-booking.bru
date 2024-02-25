@@ -1,0 +1,86 @@
+meta {
+  name: Add a booking
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/booking/
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: */*
+}
+
+body:json {
+  {
+      "firstname": "{{firstName}}",
+      "lastname": "{{lastName}}",
+      "totalprice": {{totalPrice}},
+      "depositpaid": {{depositPaid}},
+      "bookingdates": {
+          "checkin": "{{checkIn}}",
+          "checkout": "{{checkOut}}"
+      }
+  }
+}
+
+vars:pre-request {
+  firstName: Mickey
+  lastName: Mouse
+  totalPrice: 50000
+  depositPaid: true
+  checkIn: 2022-05-01
+  checkOut: 2022-05-31
+  description: successful request
+  httpResponse: 200
+}
+
+assert {
+  res.status: eq 200
+  res.body.bookingid: isNumber 
+  res.body.booking.firstname: isString 
+  res.booking.booking.bookingdates: isDefined 
+}
+
+script:pre-request {
+  // 
+}
+
+script:post-response {
+  let data = res.getBody();
+  bru.setVar("bookingId", data.bookingid);
+}
+
+tests {
+  // // Retrieve collection variables for data-driven tests
+  // const httpResponse = parseInt(pm.collectionVariables.get("httpResponse"));
+  // const description = pm.collectionVariables.get("description");
+  // const fullName = pm.collectionVariables.get("firstName") + ' ' + pm.collectionVariables.get("lastName");;
+  // 
+  // // Validate response code
+  // pm.test("Status code is " + httpResponse + " for " + description + " ('" + fullName + "')", function () {
+  //     pm.expect(pm.response.code).to.eql(httpResponse);
+  // });
+  // 
+  // // Validate the response data for successful responses
+  // if ( pm.response.code === 200 ) {
+  //     const jsonData = pm.response.json();
+  // 
+  //     pm.test("Test data type of a 200 response", () => {
+  //         pm.expect(jsonData).to.be.an("object");
+  //         pm.expect(jsonData.bookingid).to.be.a("number");
+  //         pm.expect(jsonData.booking.firstname).to.be.a("string");
+  //         pm.expect(jsonData.booking.lastname).to.be.a("string");
+  //         pm.expect(jsonData.booking.totalprice).to.be.a("number");
+  //         pm.expect(jsonData.booking.depositpaid).to.be.a("boolean");
+  //         pm.expect(jsonData.booking.bookingdates.checkin).to.be.a("string");
+  //         pm.expect(jsonData.booking.bookingdates.checkout).to.be.a("string");
+  //     })
+  // 
+  //     // Persist the bookingId for later use (only delete our own test data)
+  //     pm.collectionVariables.set("bookingId", jsonData.bookingid);
+  // };
+}

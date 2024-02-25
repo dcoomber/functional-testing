@@ -1,0 +1,42 @@
+meta {
+  name: Retrieve list of bookings
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/booking
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body[0].bookingid: isNumber
+}
+
+script:post-response {
+  let data = res.getBody();
+  bru.setVar("bookingId", data[0].bookingid);
+}
+
+tests {
+  // // Response code
+  // pm.test("Test returned 200 code", function() {
+  //     pm.expect(pm.response.code).to.eql(200);
+  // });
+  // 
+  // // Check the response object
+  // pm.test("Test that response is an array", () => {
+  //   pm.expect(pm.response.json()).to.be.an("array");
+  // });
+  // 
+  // // If there is data, confirm the data type
+  // if ( pm.response.json().length > 0 ) {
+  //     pm.test("Test data types of the response array", () => {
+  //         pm.expect(pm.response.json()[0].bookingid).to.be.a("number");
+  //     })
+  // 
+  //     pm.collectionVariables.set("bookingId", pm.response.json()[0].bookingid);
+  // };
+}
